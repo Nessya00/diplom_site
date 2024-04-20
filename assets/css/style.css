@@ -1,0 +1,284 @@
+*{
+    font-family: "Pixelify Sans", sans-serif;
+}
+
+html,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    color: #ffa929;
+}
+
+body{
+    background-color: #b9ffb0;!important;
+    /*background-color: #5e4983;*/
+}
+
+a{
+    text-decoration: none;
+    color: #f5aa43;
+}
+input{
+    padding: 10px 12px;
+    display: block;
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid #6ebe64;
+    line-height: 1.5rem;
+    color: lightslategrey;
+}
+
+/*
+HEADER
+ */
+
+header{
+    background: #15204f;
+    height: 70px;
+}
+
+header *{
+    color: white;
+}
+
+header h1 a{
+    color: #ffffff;
+}
+
+header h1{
+    margin-top: 14px;
+}
+
+header h1 a:hover{
+    color: #2fff00;
+}
+
+
+/*МЕНЮШКА*/
+header ul{
+    margin:0;
+    padding: 0;
+    list-style-type: none;
+    float: right;
+}
+
+/*ОБРАЩАЕМСЯ К ЭЛЕМЕНТАМ*/
+header ul li{
+    float: left;
+    position: relative;
+
+}
+
+header ul li a{
+    display: block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: #f1ead4;
+    padding: 20px;
+}
+
+header ul li a:hover{
+    background: #2fff00;
+    transition: 0.5s;
+    color: white;
+}
+
+header ul li ul{
+    position: absolute;
+    top: 66px;
+    right: 0;
+    width: 180px;
+    display: none;
+    z-index: 111;
+}
+
+header ul li:hover ul{
+    display: block;
+}
+
+header ul li ul li{
+    width: 100%;
+}
+
+header ul li ul li a{
+    background: #15204f;
+    color: white;
+}
+/*
+MAIN
+*/
+
+.main-content h2{
+    margin: 30px 0;
+}
+
+.main-content .post{
+    margin-bottom: 2em;
+}
+
+.main-content .post_text{
+    background: white;
+    padding: 8px;
+    border-radius: 3px;
+}
+
+.main-content .post_text h3{
+    margin: 14px 0;
+}
+
+.main-content .post_text h3 a:hover{
+    text-decoration: underline;
+    color: greenyellow;
+}
+
+.main-content .post_text i{
+    margin: 0 14px 14px 0;
+}
+
+/*
+SIDEBAR
+*/
+
+.search{
+    margin-top: 100px;
+}
+
+.sidebar .section{
+    background: white;
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom:30px;
+}
+
+.sidebar .topics ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #6ebe64;
+}
+
+.sidebar .topics ul li a{
+    display: block;
+    padding: 15px 0 15px 0;
+    border-bottom: 1px solid #2fff00;
+    transition: all 0.3s;
+    text-decoration: none;
+    font-weight: 500;
+    color: #ffa929;
+    font-size: 1.2em;
+}
+
+.sidebar .topics ul li a:hover{
+    padding-left: 10px;
+    transition: all 0.3s;
+}
+
+.footer {
+    background: #15204f;
+    color: white;
+    position: relative;
+}
+
+.footer .footer-section{
+    padding: 22px;
+}
+
+.footer .about .contact span{
+    display: block;
+    font-size: 1.1em;
+    margin-bottom:8px;
+}
+
+.footer .about .socials a{
+    border: 1px solid #e1e1e1;
+    width: 45px;
+    height: 41px;
+    padding-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.3em;
+    border-radius: 5px;
+    transition: all .3s;
+    color: lightslategrey;
+}
+
+.footer .about .socials a:hover{
+    border: 1px solid white;
+    color: white;
+    transition: all .3s;
+}
+
+.footer .links ul a{
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    transition: all .3s;
+    color: white;
+    text-decoration: none;
+}
+
+.footer .links ul a:hover{
+    color: white;
+    margin-left: 15px;
+    transition: all .3s;
+}
+
+.footer .contact-form .contact-input{
+    background: #f8f8f8;
+    color: #f57843;
+    margin-bottom: 10px;
+    line-height: 1.5rem;
+    padding: .9rem 1.4rem;
+    border: none;
+    width: 100%;
+}
+
+.footer .contact-form .contact-input:focus{
+    background: black;
+}
+
+.footer .contact-form .contact-btn{
+    float: right;
+    font-size: 1.1em;
+}
+
+.footer .footer-bottom {
+    background: #1b2457;
+    color: rgb(245, 170, 67);
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding-top: 20px;
+}
+
+/*
+FORMS
+ */
+.reg_form h2{
+    text-align: center;
+    margin: 30px 0;
+}
+
+.reg_form input{
+    height: 3.3em;
+}
+
+.reg_form a{
+    font-size: 1.2em;
+    transition: all .3s;
+    color: lightslategrey;
+    text-decoration: none;
+    margin-left: 60px;
+}
+
+.reg_form a:hover{
+    margin-left: 55px;
+    transition: all .3s;
+}
