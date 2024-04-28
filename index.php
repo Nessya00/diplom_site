@@ -1,4 +1,10 @@
-<?php include("path.php"); ?>
+<?php
+include "path.php";
+//include 'app/database/db.php';
+include "app/controllers/topics.php";
+//tt($_SESSION);
+//exit();
+?>
 
 <!doctype html>
 <html lang="en">
@@ -6,7 +12,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
 
 <!--    &lt;!&ndash; Подключение Bootstrap CSS через CDN &ndash;&gt;-->
 <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
@@ -16,11 +21,7 @@
 
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 
     <!--Custom styling-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +29,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/style.css">
-
 
     <title>My events</title>
 </head>
@@ -118,12 +118,9 @@
             <div class="section topics">
                 <h3>Topics</h3>
                 <ul>
-                    <li><a href="#">Games</a></li>
-                    <li><a href="#">Folk music</a></li>
-                    <li><a href="#">Festival</a></li>
-                    <li><a href="#">Master-class</a></li>
-                    <li><a href="#">Discussions</a></li>
-                    <li><a href="#">Exhibition</a></li>
+                    <?php foreach ($topics as $key => $topic): ?>
+                    <li><a href="#"><?=$topic['name']; ?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>

@@ -50,41 +50,41 @@ include "../../app/controllers/posts.php";
 
 <div class="container">
     <div class="row">
-    <?php include "../../app/include/sidebar-admin.php"; ?>
+        <?php include "../../app/include/sidebar-admin.php"; ?>
         <div class="posts col-8">
-            <div class="button row">
-                <a href="<?php echo BASE_URL . "admin/posts/create.php";?>" class="admin-bth col-3 btn-warning">Создать</a>
-                <span class="col-1"></span>
-                <a href="<?php echo BASE_URL . "admin/posts/index.php";?>" class="col-4 admin-bth btn-warning">Редактировать</a>
-            </div>
             <div class="row title-table">
-                <h2>Добавление записи</h2>
+                <h2>Редактирование записи</h2>
             </div>
             <div class="row add-post">
-                <form action="create.php" method="post">
+                <form action="edit.php" method="post">
+                    <input type="hidden" name="id" value="<?=$id;?>">
                     <div class="col mb-4">
-                        <input name="title" type="text" class="form-control" placeholder="Title" aria-label="Название статьи">
+                        <input value="<?=$post['title'];?>" name="title" type="text" class="form-control" placeholder="Title" aria-label="Название статьи">
                     </div>
                     <div class="col">
                         <label for="editor" class="form-label">Содержимое записи</label>
-                        <textarea name="content" id="editor" class="form-control" rows="6"></textarea>
+                        <textarea name="content" id="editor" class="form-control" rows="6"><?=$post['content'];?></textarea>
                     </div>
                     <div class="input-group col mb-4 mt-4">
                         <input name="img" type="file" class="form-control" id="inputGroupFile02">
                         <label for="inputGroupFile02" class="input-group-text">Загрузить</label>
                     </div>
                     <select name="topic" class="form-select mb-2" aria-label="Default select example">
-                        <option selected>Выбрать категорию:</option>
                         <?php foreach ($topics as $key => $topic): ?>
                             <option value="<?=$topic['id'];?>"><?=$topic['name'];?></option>
                         <?php endforeach; ?>
                     </select>
                     <div class="col col-6">
-                        <input class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" name="publish" checked>
+                        <?php if (empty($publish) && $publish == 0): ?>
+                        <input class="form-check-input" type="checkbox" id="flexCheckChecked" name="publish">
                         <label class="form-check-label" for="flexCheckChecked">Публиковать</label>
+                        <?php else: ?>
+                        <input class="form-check-input" type="checkbox" id="flexCheckChecked" name="publish">
+                        <label class="form-check-label" for="flexCheckChecked">Публиковать</label>
+                        <?php endif; ?>
                     </div>
                     <div class="col col-6">
-                        <button name="add_post" class="btn btn-warning" type="submit">Добавить запись</button>
+                        <button name="edit_post" class="btn btn-warning" type="submit">Сохранить запись</button>
                     </div>
                 </form>
             </div>

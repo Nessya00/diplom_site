@@ -1,16 +1,14 @@
-
 <?php
-/*
- ФУНКЦИЯ ЗАПРОСОВ
- */
+session_start();
+
 require 'connect.php'; /*Подключаем */
 
 function tt($value){
     echo '<pre>';
     print_r($value);
     echo '</pre>';
+    exit();
 }
-
 
 
 //Проверка выполнения запроса к бд
@@ -20,7 +18,6 @@ function dbCheckError($query){
         echo $errInfo[2];
         exit();
     }
-
     return true;
 }
 //Запрос на получение данных одной таблицы
@@ -73,7 +70,6 @@ function selectOne($table, $params = []){
             $i++;
         }
     }
-    //$sql = $sql . " LIMIT 1";
 
     $query = $pdo->prepare($sql);   /*Подготовка*/
     $query->execute();              /*Выполнение*/
@@ -103,27 +99,57 @@ function insert($table, $params){
         $i++;
     }
 
-    $sql ="INSERT INTO $table ($coll) VALUES($mask)";
-    tt($sql);
-    exit();
+    $sql ="INSERT INTO $table ($coll) VALUES($mask); SELECT SCOPE_IDENTITY()";
     $query = $pdo->prepare($sql);   /*Подготовка*/
     $query->execute($params);              /*Выполнение*/
     dbCheckError($query);
-
+    return $pdo->lastInsertId();
 }
-$arrData = [
-    'username' => 'Glebych',
-    'email' => 'bugaga@re.ru',
-    'password' => 'xem564f849',
-    'f_name' => 'Gleb',
-    'l_name' => 'Martov',
-    'gender' => '0',
-    'birthday' => '1998-04-21',
-    'admin' => '0',
-    'id_city' => '3'
-];
 
-insert('users',$arrData);
+function update($table, $id, $params){
+    global $pdo;
+    $i = 0;
+    $str = '';
+    foreach ($params as $key => $value) {
+        if ($i === 0){
+            $str = $str . $key . " = '" . $value . "'";
+        }else{
+            $str = $str .", " . $key . " = '" . $value . "'";
+        }
+        $i++;
+    }
 
-//tt(selectAll('users', $params));
-//tt(selectOne('users'));
+    $sql = "UPDATE $table SET $str WHERE id = $id";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+}
+
+function delete($table, $id){
+    global $pdo;
+    $sql = "DELETE FROM $table WHERE id =". $id;
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+}
+
+//выборка записей с автором в админку
+function selectAllFromPostsWithUsers($table1, $table2) {
+    global $pdo;
+    $sql = "
+    SELECT
+    t1.id,
+    t1.title,
+    t1.img,
+    t1.content,
+    t1.status,
+    t1.id_topic,
+    t1.created_data,
+    t2.username
+    FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_user = t2.id
+    ";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    dbCheckError($query);
+    return $query->fetchAll();
+}

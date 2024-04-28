@@ -1,4 +1,6 @@
-<?php include("path.php"); ?>
+<?php include("path.php");
+include 'app/controllers/users.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,14 +43,14 @@
     <form class="row justify-content-center" method="post" action="log.html">
         <h2 class="col-12">Авторизпация</h2>
         <div class="mb-3 col-12 col-md-4">
-            <label for="formGroupExampleInput" class="form-label">Example label</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+            <label for="formGroupExampleInput" class="form-label">Введите почту</label>
+            <input name="email" value="<?=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите вашу почту">
         </div>
         <div class="w-100"></div>
 
         <div class="mb-3 col-12 col-md-4">
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите ваш пароль">
+            <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите ваш пароль">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">

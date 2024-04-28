@@ -2,7 +2,7 @@
 
 $driver = 'mysql';
 $host = 'localhost';
-$db_name = 'diplom_site';
+$db_name = 'diplom-site';
 $db_user = 'root';
 $db_pass = 'mysql';
 $charset = 'utf8';

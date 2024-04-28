@@ -1,4 +1,8 @@
-<?php include("path.php"); ?>
+<?php include("path.php");
+include 'app/controllers/users.php';
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -15,9 +19,6 @@
 
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
@@ -27,7 +28,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/style.css">
-
 
     <title>My events</title>
 </head>
@@ -42,27 +42,27 @@
         <h2>Форма регистрации</h2>
         <div class="mb-3 col-12 col-md-4">
             <label for="formGroupExampleInput" class="form-label">Example label</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+            <input name="login" value="<?=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input name="email" value="<?=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
             <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input name="pass-first" type="password" class="form-control" id="exampleInputPassword1">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword2">
+            <label for="exampleInputPassword2" class="form-label">Password</label>
+            <input name="pass-second" type="password" class="form-control" id="exampleInputPassword2">
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
-            <button type="button" class="btn btn-warning">Регистрация</button>
+            <button type="submit" class="btn btn-warning" name="button-reg">Регистрация</button>
             <a href="log.php">Войти</a>
         </div>
     </form>
