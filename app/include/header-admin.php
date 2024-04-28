@@ -11,7 +11,7 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-user"></i>
-<!--                           <?php //echo $_SESSION['login']; ?> -->
+                           <?php echo $_SESSION['login']; ?>
                         </a>
                     </li>
                     <li>

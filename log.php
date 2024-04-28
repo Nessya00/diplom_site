@@ -40,7 +40,7 @@ include 'app/controllers/users.php';
 
 <!--FORM reg-->
 <div class="container reg_form">
-    <form class="row justify-content-center" method="post" action="log.html">
+    <form class="row justify-content-center" method="post" action="log.php">
         <h2 class="col-12">Авторизпация</h2>
         <div class="mb-3 col-12 col-md-4">
             <label for="formGroupExampleInput" class="form-label">Введите почту</label>
@@ -54,7 +54,7 @@ include 'app/controllers/users.php';
         </div>
         <div class="w-100"></div>
         <div class="mb-3 col-12 col-md-4">
-            <button type="button" class="btn btn-warning">Войти</button>
+            <button name="button-log" type="submit" class="btn btn-warning">Войти</button>
             <a href="reg.php">Зарегистрироваться</a>
         </div>
     </form>

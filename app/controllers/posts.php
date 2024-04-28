@@ -12,10 +12,6 @@ $topics = selectAll('topics');
 $posts = selectAll('posts');
 $postsAdm = selectAllFromPostsWithUsers('posts', 'users');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-    tt($_SERVER);
-    exit();
-}
 
 //код для формы создания записи
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])){
@@ -36,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])){
                 'content' => $content,
                 'img' => $img,
                 'status' => $publish,
-                'id_topic' => $_POST['img']
+                'id_topic' => $topic
             ];
             $post = insert('posts', $post);
             $post = selectOne('posts', ['id' => $id]);
@@ -79,7 +75,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_post'])){
             'content' => $content,
             'img' => $img,
             'status' => $publish,
-            'id_topic' => $_POST['img']
+            'id_topic' => $topic
         ];
         $post = update('posts', $id, $post);
         header('location: ' . BASE_URL . 'admin/posts/index.php');

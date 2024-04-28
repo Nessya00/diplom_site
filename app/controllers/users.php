@@ -3,6 +3,19 @@ include SITE_ROOT . '/app/database/db.php';
 
 $errMsg = '';
 
+function userAuth($user){
+    $_SESSION['id'] = $user['id'];
+    $_SESSION['login'] = $user['username'];
+    $_SESSION['admin'] = $user['admin'];
+//    tt($user);
+//    exit();
+
+    if ($_SESSION['admin']){
+        header('Location: ' . BASE_URL . 'admin/users/index.php');
+    }else{
+        header('Location: ' . BASE_URL);
+    }
+}
 //регистрация
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
     $admin = 0;
@@ -29,15 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
             ];
             $id = insert('users', $post);
             $user = selectOne('users', ['id' => $id]);
-            $_SESSION['id'] = $id;
-            $_SESSION['login'] = $user['username'];
-            $_SESSION['admin'] = $user['admin'];
-
-            if ($_SESSION['admin']){
-                header('Location: ' . BASE_URL . 'admin/admin.php');
-            }else{
-                header('Location: ' . BASE_URL);
-            }
+            userAuth($user);
 
         }else{
             $errMsg = "Пользователь с такой почтой уже зарегистрирован!";
@@ -52,7 +57,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-reg'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['button-log'])) {
     $email = trim($_POST['email']);
     $pass = trim($_POST['password']);
-    if ($login === '' || $pass === '') {
+    if ($email === '' || $pass === '') {
         $errMsg = "Не все поля заполнены!";
+//        exit();
+    }else{
+        $existence = selectOne('users', ['email' => $email]);
+//            tt($existence);
+//    exit();
+        if ($existence && password_verify($pass, $existence['password'])) {
+            userAuth($existence);
+        }else{
+            $errMsg = "Почта или пароль введены неверно!";
+        }
     }
+}else{
+    $email = '';
 }
