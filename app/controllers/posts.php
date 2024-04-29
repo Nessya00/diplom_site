@@ -20,6 +20,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])){
     $topic = trim($_POST['topic']);
 
     $publish = trim($_POST['publish']) ? 1 : 0;
+//    tt($_POST);
+//    exit();
 
     if ($title === '' || $content === '' || $topic === '') {
         $errMsg = "Не все поля заполнены!";
@@ -34,6 +36,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_post'])){
                 'status' => $publish,
                 'id_topic' => $topic
             ];
+
             $post = insert('posts', $post);
             $post = selectOne('posts', ['id' => $id]);
             header('location: ' . BASE_URL . 'admin/posts/index.php');

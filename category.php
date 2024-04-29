@@ -1,32 +1,27 @@
-<?php include("path.php");
-//include SITE_ROOT . '/app/database/db.php';
+<?php
+include "path.php";
 include "app/controllers/topics.php";
-
-$post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
-//tt($post);/
+$posts = selectAll('posts', ['id_topic' => $_GET['id']]);
+//tt($posts);
+$category = selectOne('topics', ['id' => $_GET['id']]);
 ?>
 
-    <!doctype html>
-    <html lang="en">
+<!doctype html>
+<html lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-    <!--    &lt;!&ndash; Подключение Bootstrap CSS через CDN &ndash;&gt;-->
-    <!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<!--    &lt;!&ndash; Подключение Bootstrap CSS через CDN &ndash;&gt;-->
+<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">-->
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 
     <!--Custom styling-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +29,6 @@ $post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/style.css">
-
 
     <title>My events</title>
 </head>
@@ -56,23 +50,32 @@ $post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
 <!--БЛОК main-->
 <div class="container">
     <div class="content row">
-        <!-- main content -->
+    <!-- main content -->
         <div class="main-content col-md-8 col-12">
-            <h2><?php echo $post['title']; ?></h2>
-
-            <div class="single_post row">
-                <div class="img col-12">
+            <h2>Статьи с раздела "<?=$category['name'];?>"</h2>
+            <?php if (empty($posts)): ?>
+                <p>К сожалению в данном разделе пока нет статей(</p>
+            <?php else: ?>
+            <?php foreach ($posts as $post) :
+                    $user = selectOne('users', ['id' => $post['id_user']]);
+            ?>
+            <div class="post row">
+                <div class="img col-12 col-md-4">
                     <img src="<?=BASE_URL . 'assets/img/' . $post['img']; ?>" alt="<?=$post['title']?>" class="img-thumbnail">
                 </div>
-                <div class="info">
-                    <i class="far fa-user"> <?=$post['username']; ?> </i>
+                <div class="post_text col-12 col-md-8">
+                    <h3>
+                        <a href="<?=BASE_URL . 'single.php?post=' . $post['id'];?>"><?= substr($post['title'], 0, 120) . '...' ?></a>
+                    </h3>
+                    <i class="far fa-user"> <?=$user['username'];?> </i>
                     <i class="far fa-calendar"> <?=$post['created_data']; ?> </i>
-                </div>
-                <div class="single_post_text col-12">
-                    <?=$post['content']; ?>
+                    <p class="prewiew-text">
+                        <?=mb_substr($post['content'], 0, 150, 'UTF-8') . '...' ?>
+                    </p>
                 </div>
             </div>
-
+            <?php endforeach; ?>
+            <?php endif; ?>
 
         </div>
         <!--SIDEBAR-->
@@ -88,7 +91,7 @@ $post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
                 <h3>Topics</h3>
                 <ul>
                     <?php foreach ($topics as $key => $topic): ?>
-                        <li><a href="<?=BASE_URL . 'category.php?id=' . $topic['id']; ?>"><?=$topic['name']; ?></a></li>
+                    <li><a href="<?=BASE_URL . 'category.php?id=' . $topic['id']; ?>"><?=$topic['name']; ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -103,4 +106,4 @@ $post = selectPostFromPostsWithUsersOnSingle('posts', 'users', $_GET['post']);
 <!--FOOTER end-->
 
 </body>
-    </html><?php
+</html>

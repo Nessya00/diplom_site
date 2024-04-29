@@ -1,9 +1,8 @@
 <?php
 include "path.php";
-//include 'app/database/db.php';
 include "app/controllers/topics.php";
-//tt($_SESSION);
-//exit();
+$posts = selectAllFromPostsWithUsersOnIndex('posts', 'users');
+//tt($posts);
 ?>
 
 <!doctype html>
@@ -53,65 +52,31 @@ include "app/controllers/topics.php";
     <!-- main content -->
         <div class="main-content col-md-8 col-12">
             <h2>Последние публикации</h2>
+            <?php foreach ($posts as $post) : ?>
+            <div class="post row">
+                <div class="img col-12 col-md-4">
+                    <img src="<?=BASE_URL . 'assets/img/' . $post['img']; ?>" alt="<?=$post['title']?>" class="img-thumbnail">
+                </div>
+                <div class="post_text col-12 col-md-8">
+                    <h3>
+                        <a href="<?=BASE_URL . 'single.php?post=' . $post['id'];?>"><?= substr($post['title'], 0, 120) . '...' ?></a>
+                    </h3>
+                    <i class="far fa-user"> <?=$post['username']; ?> </i>
+                    <i class="far fa-calendar"> <?=$post['created_data']; ?> </i>
+                    <p class="prewiew-text">
+                        <?=mb_substr($post['content'], 0, 150, 'UTF-8') . '...' ?>
+                    </p>
+                </div>
+            </div>
+            <?php endforeach; ?>
 
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/img/kyber.jpg" alt="" class="img-thumbnail">
-                </div>
-                <div class="post_text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Прикольная статья...</a>
-                    </h3>
-                    <i class="far fa-user">Имя Автора</i>
-                    <i class="far fa-calendar">Mar 11, 2019</i>
-                    <p class="prewiew-text">
-                        Мы в настоящее время находимся в процессе разработки этого веб-ресурса и
-                        скоро представим здесь полноценное содержание. Мы приносим извинения за
-                        временное неудобство.
-                    </p>
-                </div>
-            </div>
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/img/kyber2.jpg" alt="" class="img-thumbnail">
-                </div>
-                <div class="post_text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Прикольная статья...</a>
-                    </h3>
-                    <i class="far fa-user">Имя Автора</i>
-                    <i class="far fa-calendar">Mar 11, 2019</i>
-                    <p class="prewiew-text">
-                        Мы в настоящее время находимся в процессе разработки этого веб-ресурса и
-                        скоро представим здесь полноценное содержание. Мы приносим извинения за
-                        временное неудобство.
-                    </p>
-                </div>
-            </div>
-            <div class="post row">
-                <div class="img col-12 col-md-4">
-                    <img src="assets/img/kyber3.jpg" alt="" class="img-thumbnail">
-                </div>
-                <div class="post_text col-12 col-md-8">
-                    <h3>
-                        <a href="#">Прикольная статья...</a>
-                    </h3>
-                    <i class="far fa-user">Имя Автора</i>
-                    <i class="far fa-calendar">Mar 11, 2019</i>
-                    <p class="prewiew-text">
-                        Мы в настоящее время находимся в процессе разработки этого веб-ресурса и
-                        скоро представим здесь полноценное содержание. Мы приносим извинения за
-                        временное неудобство.
-                    </p>
-                </div>
-            </div>
         </div>
         <!--SIDEBAR-->
         <div class="sidebar col-md-3 col-12">
 
             <div class="section search">
                 <h3>Search</h3>
-                <form action="/" method="post">
+                <form action="search.php" method="post">
                     <input type="text" name="search-term" class="text-input" placeholder="Search...">
                 </form>
             </div>
@@ -119,7 +84,7 @@ include "app/controllers/topics.php";
                 <h3>Topics</h3>
                 <ul>
                     <?php foreach ($topics as $key => $topic): ?>
-                    <li><a href="#"><?=$topic['name']; ?></a></li>
+                    <li><a href="<?=BASE_URL . 'category.php?id=' . $topic['id']; ?>"><?=$topic['name']; ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
