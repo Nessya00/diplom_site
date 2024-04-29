@@ -66,17 +66,18 @@ include "../../app/controllers/users.php";
                 <div class="mb-12 col-12 col-md-12 err">
                     <?php include '../../app/helps/errorInfo.php'; ?>
                 </div>
-                <form action="create.php" method="post">
+                <form action="edit.php" method="post">
+                    <input name="id" value="<?=$id;?>" type="hidden">
                     <div class="col">
                         <label for="formGroupExampleInput" class="form-label">Login</label>
-                        <input name="login" value="<?=$login;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите login">
+                        <input name="login" value="<?=$username;?>" type="text" class="form-control" id="formGroupExampleInput" placeholder="Введите login">
                     </div>
                     <div class="col">
                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input name="email" value="<?=$email;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите email">
+                        <input name="email" value="<?=$email_edit;?>" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите email">
                     </div>
                     <div class="col">
-                        <label for="exampleInputPassword1" class="form-label">Пароль</label>
+                        <label for="exampleInputPassword1" class="form-label">Сбросить пароль</label>
                         <input name="pass-first" type="password" class="form-control" id="exampleInputPassword1" placeholder="Введите пароль">
                     </div>
                     <div class="col">
@@ -86,7 +87,7 @@ include "../../app/controllers/users.php";
                     <input class="form-check-input" value="1" type="checkbox" id="flexCheckChecked" name="admin">
                     <label class="form-check-label" for="flexCheckChecked">Admin</label>
                     <div class="col">
-                        <button name="create-user" class="btn btn-warning" type="submit">Создать</button>
+                        <button name="update-user" class="btn btn-warning" type="submit">Обновить</button>
                     </div>
                 </form>
             </div>
